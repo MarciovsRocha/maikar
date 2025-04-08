@@ -1,5 +1,6 @@
 ﻿import { useEffect, useState } from 'react';
 import api from '../services/api';
+import './CarsPage.css';
 
 function CarsPage() {
     const [cars, setCars] = useState([]);
@@ -15,7 +16,7 @@ function CarsPage() {
             <h2>Meus Carros</h2>
             <ul>
                 {cars.map(car => (
-                    <li key={car.id}>
+                    <li key={car.id}><div className={card}></div>
                         {car.brand} {car.model} ({car.year}) - {car.mileage} km
                     </li>
                 ))}

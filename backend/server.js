@@ -22,7 +22,7 @@ app.use('/api/maintenance', maintenanceRoutes);
 app.use('/api/parts', partRoutes);
 app.use('/api/services', serviceRoutes);
 
-app.get('/', (req, res) => res.send('🚗 API de Manutenção de Carros rodando!'));
+app.get('/', (req, res) => res.send('API de Manutenção de Carros rodando!'));
 
 app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);

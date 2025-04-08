@@ -1,5 +1,5 @@
 # maikar
- 
+ ```
 backend/
 │
 ├── app.js
@@ -35,3 +35,4 @@ backend/
 │
 └── utils/
     └── generateToken.js     # Função para gerar JWT
+```

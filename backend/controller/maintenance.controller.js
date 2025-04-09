@@ -1,7 +1,7 @@
 const db = require('../config/db');
 
 exports.getAll = async (req, res) => {
-  const [rows] = await db.query('SELECT * FROM maintenance WHERE car_id = ?', [req.query.car_id]);
+  const [rows] = await db.query('SELECT * FROM maintenance WHERE car_id = (select id from cars where user_id = ?)', [req.user.id]);
   res.json(rows);
 };
 

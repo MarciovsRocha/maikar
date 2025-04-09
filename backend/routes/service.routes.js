@@ -6,6 +6,6 @@ const authMiddleware = require('../middleware/auth.middleware');
 // Todas as rotas exigem autenticação
 router.use(authMiddleware);
 
-router.get('/:maintenance_id', getByMaintenance);
+router.get('/:maintenance_id', getByMaintenance)
 
 module.exports = router;

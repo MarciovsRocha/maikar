@@ -32,3 +32,11 @@ exports.getByMaintenance = async (req, res) => {
     return res.status(500).json({message: 'Error Fetching services'});
   }
 };
+
+exports.create = async (req, res) => {
+  try {
+
+  }catch(err){
+    return res
+  }
+};

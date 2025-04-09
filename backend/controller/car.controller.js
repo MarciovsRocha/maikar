@@ -6,10 +6,10 @@ exports.createCar = async (req, res) => {
     let carData = req.body;
     carData = {...carData, user_id: req.user.id};
     const carId = await Car.create(carData);
-    res.status(201).json({ message: 'Car created successfully', id: carId });
+    return res.status(201).json({ message: 'Car created successfully', id: carId });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error creating car' });
+    return res.status(500).json({ message: 'Error creating car' });
   }
 };
 
@@ -17,9 +17,9 @@ exports.createCar = async (req, res) => {
 exports.getAllCars = async (req, res) => {
   try {
     const cars = await Car.findByUser(req.user.id);
-    res.json(cars);
+    return res.json(cars);
   } catch (err) {
-    res.status(500).json({ message: 'Error fetching cars' });
+    return res.status(500).json({ message: 'Error fetching cars' });
   }
 };
 
@@ -31,9 +31,9 @@ exports.getCarById = async (req, res) => {
     if ((!car) || (req.user.id != car.user_id) ) {
       return res.status(404).json({ message: 'Car not found' });
     }
-    res.json(car);
+    return res.json(car);
   } catch (err) {
-    res.status(500).json({ message: 'Error fetching car' });
+    return res.status(500).json({ message: 'Error fetching car' });
   }
 };
 
@@ -47,9 +47,9 @@ exports.updateCar = async (req, res) => {
       return res.status(404).json({ message: 'Car not found' });
     }
     await Car.update(id, updatedData);
-    res.json({ message: 'Car updated successfully' });
+    return res.json({ message: 'Car updated successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Error updating car' });
+    return res.status(500).json({ message: 'Error updating car' });
   }
 };
 
@@ -62,9 +62,9 @@ exports.deleteCar = async (req, res) => {
       return res.status(404).json({ message: 'Car not found' });
     }
     await Car.delete(id);
-    res.json({ message: 'Car deleted successfully' });
+    return res.json({ message: 'Car deleted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Error deleting car' });
+    return res.status(500).json({ message: 'Error deleting car' });
   }
 };
 
@@ -72,9 +72,9 @@ exports.getCarsByTokenUser = async (req, res) => {
   try {
     const userId = req.user.id;
     const cars = await Car.findByUser(userId);
-    res.json(cars);
+    return res.json(cars);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Erro ao buscar carros do usuário' });
+    return res.status(500).json({ message: 'Erro ao buscar carros do usuário' });
   }
 };

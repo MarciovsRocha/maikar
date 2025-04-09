@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getByMaintenance } = require('../controller/service.controller');
+const { getByMaintenance, create, update, deleteService } = require('../controller/service.controller');
 const authMiddleware = require('../middleware/auth.middleware');
 
 // Todas as rotas exigem autenticação

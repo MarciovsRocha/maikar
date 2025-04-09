@@ -2,7 +2,7 @@ const db = require('../config/db');
 
 exports.create = async (car) => {
   const [result] = await db.query(
-      'INSERT INTO cars (user_id, brand, model, year, km) VALUES (?, ?, ?, ?, ?)',
+      'INSERT INTO cars (user_id, brand, model, year, km_current) VALUES (?, ?, ?, ?, ?)',
       [car.user_id, car.brand, car.model, car.year, car.km]
   );
   return result.insertId;
@@ -20,7 +20,7 @@ exports.findById = async (id) => {
 
 exports.update = async (id, car) => {
   const [result] = await db.query(
-      'UPDATE cars SET brand = ?, model = ?, year = ?, km = ? WHERE id = ?',
+      'UPDATE cars SET brand = ?, model = ?, year = ?, km_current = ? WHERE id = ?',
       [car.brand, car.model, car.year, car.km, id]
   );
   return result;

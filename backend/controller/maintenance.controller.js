@@ -77,8 +77,28 @@ exports.deleteById = async (req, res) => {
   }
 };
 
-/*
 exports.update = async (req, res) => {
+  try{
+    const updatedMaintenance = await Maintenance.getById(req.params.id);
 
+    if (!updatedMaintenance) {
+      return res.status(404).json({message: 'Maintenance not found'});
+    }
+
+    let MyMaintenances = await Maintenance.getByUserId(req.user.id);
+    if (MyMaintenances.filter((maintenance) => {
+      if (maintenance.id == updatedMaintenance.id) return maintenance;
+    }).length <= 0) {
+      return res.status(404).json({message: 'Maintenance not found'});
+    }
+
+    const data = req.body;
+
+    let _ = await Maintenance.update(req.params.id, data);
+
+    return res.status(200).json({message: 'Maintenance updated successfully'});
+
+  }catch(err){
+    return res.status(500).json({message: 'Error Updating maintenance'});
+  }
 };
-*/

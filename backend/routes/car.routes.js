@@ -13,7 +13,7 @@ router.post('/', carController.createCar);
 router.get('/', carController.getAllCars);
 
 // Buscar carro por ID
-//router.get('/:id', carController.getCarById);
+router.get('/:id', carController.getCarById);
 
 // Atualizar carro
 router.put('/:id', carController.updateCar);

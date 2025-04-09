@@ -43,7 +43,7 @@ exports.updateCar = async (req, res) => {
     const id = req.params.id;
     const updatedData = req.body;
     const car = await Car.findById(id);
-    if ((!(car)) || (car.user_id != req.user.id)){
+    if ((!car) || (car.user_id != req.user.id)){
       return res.status(404).json({ message: 'Car not found' });
     }
     await Car.update(id, updatedData);
@@ -58,7 +58,7 @@ exports.deleteCar = async (req, res) => {
   try {
     const id = req.params.id;
     const car = await Car.findById(id);
-    if ((!(car)) || (car.user_id != req.user.id)){
+    if ((!car) || (car.user_id != req.user.id)){
       return res.status(404).json({ message: 'Car not found' });
     }
     await Car.delete(id);

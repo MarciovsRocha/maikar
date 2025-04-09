@@ -16,7 +16,7 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   try{
     const id = req.params.id;
-    const maintenance = await Maintenance.findById(id);
+    const maintenance = await Maintenance.getById(id);
     const car = await Car.findById(maintenance.car_id);
     if ((!maintenance) || (car.user_id != req.user.id)){
       return res.status(404).json({message: 'Maintenance not found'});
@@ -28,25 +28,28 @@ exports.getById = async (req, res) => {
 };
 
 exports.create = async (req, res) => {
+  try {
+    const maintenance_prop = {
+      car_id: req.body.car_id,
+      date: req.body.date,
+      next_revision: req.body.next_revision,
+      notes: req.body.notes,
+    };
 
-  const maintenance_prop = {
-    card_id: req.body.car_id,
-    date: req.body.date,
-    next_revision: req.body.next_revision,
-    notes: req.body.notes,
-  };
+    const MyCars = await Car.findByUser(req.user.id);
+    if (MyCars.filter((car) => {
+      if (car.id == maintenance_prop.car_id) return car
+    }).length <= 0) {
+      return res.status(404).json({message: 'Car not found'});
+    }
 
-  const maintenance_id = Maintenance.create(maintenance_prop)
+    const maintenance_id = await Maintenance.create(maintenance_prop);
 
-  for (const part of req.body.parts) {
-    await Part.create({...part,  maintenance_id: maintenance_id});
+
+    return res.status(201).json({message: 'Manutenção registrada', id: maintenance_id});
+  }catch(err){
+    return res.status(500).json({message: 'Error creating maintenance'});
   }
-
-  for (const service of req.body.services) {
-    await db.query('INSERT INTO services (maintenance_id, name, price) VALUES (?, ?, ?)', [maintenance_id, service.name, service.price]);
-  }
-
-  return res.status(201).json({ message: 'Manutenção registrada' });
 };
 
 /*

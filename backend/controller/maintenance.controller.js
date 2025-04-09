@@ -3,6 +3,7 @@ const Maintenance = require('../models/maintenance.model');
 const Car = require("../models/car.model");
 const Part = require("../models/part.model");
 const Service = require("../models/service.model");
+const {getById} = require("../models/maintenance.model");
 
 exports.getAll = async (req, res) => {
   try{
@@ -52,12 +53,32 @@ exports.create = async (req, res) => {
   }
 };
 
+exports.deleteById = async (req, res) => {
+  try{
+    const deletedMaintenance = await Maintenance.getById(req.params.id);
+
+    if (!deletedMaintenance) {
+      return res.status(404).json({message: 'Maintenance not found'});
+    }
+
+    let MyMaintenances = await Maintenance.getByUserId(req.user.id);
+    if (MyMaintenances.filter((maintenance) => {
+      if (maintenance.id == deletedMaintenance.id) return maintenance;
+    }).length <= 0) {
+      return res.status(404).json({message: 'Maintenance not found'});
+    }
+
+    Maintenance.delete(req.params.id);
+
+    return res.status(200).json({message: 'Maintenance deleted successfully'});
+
+  }catch(err){
+    return res.status(500).json({message: 'Error deleting maintenance'});
+  }
+};
+
 /*
 exports.update = async (req, res) => {
 
-};
-
-exports.delete = async (req, res) => {
-  let maintenance_id = req.body.maintenance_id;
 };
 */

@@ -1,18 +1,45 @@
 const db = require('../config/db');
+const Maintenance = require('../models/maintenance.model');
+const Car = require("../models/car.model");
+const Part = require("../models/part.model");
+const Service = require("../models/service.model");
 
 exports.getAll = async (req, res) => {
-  const [rows] = await db.query('SELECT * FROM maintenance WHERE car_id = (select id from cars where user_id = ?)', [req.user.id]);
-  res.json(rows);
+  try{
+    let maintenances = await Maintenance.getByUserId(req.user.id);
+    res.json(maintenances);
+  } catch(err){
+    res.status(500).json({message: 'Error Fetching maintenances'});
+  }
+};
+
+exports.getById = async (req, res) => {
+  try{
+    const id = req.params.id;
+    const maintenance = await Maintenance.findById(id);
+    const car = await Car.findById(maintenance.car_id);
+    if ((!maintenance) || (car.user_id != req.user.id)){
+      res.status(404).json({message: 'Maintenance not found'});
+    } 
+    res.json(maintenance);
+  } catch(err){
+    res.status(500).json({message: 'Error Fetching maintenances'});
+  }
 };
 
 exports.create = async (req, res) => {
-  const { car_id, date, next_date } = req.body;
-  const [result] = await db.query('INSERT INTO maintenance (car_id, date, next_date) VALUES (?, ?, ?)', [car_id, date, next_date]);
-
-  const maintenance_id = result.insertId;
+  
+  const maintenance_prop = {
+    card_id: req.body.car_id,
+    date: req.body.date,
+    next_revision: req.body.next_revision,
+    notes: req.body.notes,
+  };
+  
+  const maintenance_id = Maintenance.create(maintenance_prop)
 
   for (const part of req.body.parts) {
-    await db.query('INSERT INTO parts (maintenance_id, name, brand, price) VALUES (?, ?, ?, ?)', [maintenance_id, part.name, part.brand, part.price]);
+    await Part.create({...part,  maintenance_id: maintenance_id});
   }
 
   for (const service of req.body.services) {
@@ -21,3 +48,13 @@ exports.create = async (req, res) => {
 
   res.status(201).json({ message: 'Manutenção registrada' });
 };
+
+/*
+exports.update = async (req, res) => {
+  
+};
+
+exports.delete = async (req, res) => {
+  let maintenance_id = req.body.maintenance_id; 
+};
+*/

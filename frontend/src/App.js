@@ -7,6 +7,8 @@ import PrivateRoute from './components/PrivateRoute';
 import Layout from './components/Layout';
 import CarEditPage from "./pages/CarEditPage";
 import CarNewPage from "./pages/CarNewPage";
+import MaintenanceCreatePage from "./pages/MaintenanceCreatePage";
+import MaintenanceEditPage from "./pages/MaintenanceEditPage";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
             <Route path="/cars/:car_id/edit" element={<CarEditPage />} />
             <Route path="/cars/new" element={<CarNewPage />} />
             <Route path="/maintenances" element={<MaintenancePage />} />
+            <Route path="/maintenances/create" element={<MaintenanceCreatePage />} />
+            <Route path="/maintenances/:id/edit" element={<MaintenanceEditPage />} />
           </Route>
 
           <Route path="*" element={<LoginPage />} />

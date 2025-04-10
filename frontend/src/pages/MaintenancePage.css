@@ -1,4 +1,8 @@
-﻿.card {
+﻿.maintenance-container {
+    padding: 2rem;
+}
+
+.card {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,4 +28,11 @@
     list-style: none;
     padding: 0;
     margin: 0;
+}
+
+.maintenance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }

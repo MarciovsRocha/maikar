@@ -112,13 +112,13 @@ function MaintenancePage() {
                                         🚗 {car ? `${car.brand} ${car.model}` : `Carro #${m.car_id}`}
                                     </div>
                                     <div className="card-buttons">
-                                        <IconButton onClick={() => navigate(`/maintenances/${m.id}/edit`)}>
+                                        <IconButton color="primary" onClick={() => navigate(`/maintenances/${m.id}/edit`)}>
                                             <EditIcon />
                                         </IconButton>
-                                        <IconButton onClick={() => handleDetails(m)}>
+                                        <IconButton color="info" onClick={() => handleDetails(m)}>
                                             <ListIcon />
                                         </IconButton>
-                                        <IconButton onClick={() => handleDelete(m.id)}>
+                                        <IconButton color="error" onClick={() => handleDelete(m.id)}>
                                             <DeleteIcon />
                                         </IconButton>
                                     </div>

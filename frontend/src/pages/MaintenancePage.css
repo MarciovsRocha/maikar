@@ -1,0 +1,27 @@
+﻿.card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.card-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.maintenance-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}

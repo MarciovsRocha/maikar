@@ -64,7 +64,7 @@ exports.deleteById = async (req, res) => {
       return res.status(404).json({message: 'Maintenance not found'});
     }
 
-    Maintenance.delete(req.params.id);
+    await Maintenance.delete(req.params.id);
 
     return res.status(200).json({message: 'Maintenance deleted successfully'});
 

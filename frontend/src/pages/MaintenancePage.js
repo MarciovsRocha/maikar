@@ -2,15 +2,18 @@
 import api from '../services/api';
 import './MaintenancePage.css';
 import { format } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
 
 import { IconButton } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import BuildIcon from '@mui/icons-material/Build';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from '@mui/material';
 
 function MaintenancePage() {
     const [maintenances, setMaintenances] = useState([]);
     const [cars, setCars] = useState({}); // car_id => car
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -59,6 +62,14 @@ function MaintenancePage() {
     return (
         <div>
             <h2>Minhas Manutenções</h2>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={() => navigate('/maintenances/create')}
+                style={{ marginBottom: '20px' }}
+            >
+                Nova Manutenção
+            </Button>
             <ul className="maintenance-list">
                 {maintenances.map(m => {
                     const car = cars[m.car_id];

@@ -5,6 +5,7 @@
 ### BackEnd 
 
 * O serviço de BackEnd está conectado à um banco MySQL de acordo com o arquivo [.env](backend/.env) (vide também o arquivo [db.js](backend/config/db.js))
+  * Obs.: Em sistemas baseados em Windows não foi possível utilizar o .env portanto deve-se realizar o apontamento manual da base de dados
 * Execute um `npm install` dentro da pasta do projeto backend
 * Rode o aplicativo de [server.js](backend/server.js) com seu Node
 
@@ -16,6 +17,7 @@
 * Login: Utilizar algum usuário abaixo
   * user: vinicius@example.com - pass: hashedpass1
   * user: marcio.souza@tecpuc.com.br - pass: SenhaForte
+
 
 ### Banco de Dados SQL
 

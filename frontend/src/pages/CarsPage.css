@@ -1,6 +1,38 @@
-﻿
-.card {
-    border: 1px solid #ccc;
-    padding: 16px;
-    border-radius: 8px;
+﻿.cars-container {
+    padding: 2rem;
 }
+
+.car-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.car-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    background-color: #f9f9f9;
+}
+
+.car-info {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.car-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.cars-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+

@@ -1,9 +1,5 @@
-const db = require('../config/db');
 const Maintenance = require('../models/maintenance.model');
 const Car = require("../models/car.model");
-const Part = require("../models/part.model");
-const Service = require("../models/service.model");
-const {getById} = require("../models/maintenance.model");
 
 exports.getAll = async (req, res) => {
   try{

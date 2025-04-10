@@ -17,7 +17,10 @@
 * Login: Utilizar algum usuário abaixo
   * user: vinicius@example.com - pass: hashedpass1
   * user: marcio.souza@tecpuc.com.br - pass: SenhaForte
-
+  * user: carla@example.com - pass: hashedpass2
+  * user: lucas@example.com - pass: hashedpass3
+  * user: fernanda@example.com - pass: hashedpass4
+  * user: bruno@example.com - pass: hashedpass5
 
 ### Banco de Dados SQL
 

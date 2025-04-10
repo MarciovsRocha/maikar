@@ -27,8 +27,8 @@ exports.login = async (req, res) => {
     const valid = await bcrypt.compare(password, user.password);
     if (!valid) return res.status(401).json({ message: 'Senha incorreta' });
 
-    res.json({ token: generateToken(user) });
+    return res.json({ token: generateToken(user) });
   } catch (error) {
-    res.status(500).json({ message: 'Erro ao fazer login' });
+    return res.status(500).json({ message: 'Erro ao fazer login' });
   }
 };
